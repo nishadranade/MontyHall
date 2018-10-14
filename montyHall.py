@@ -26,9 +26,9 @@ def simulate_guess(n):
 #second_host = np.zeros(nsim)
 
 
-def open_door( x, second_host):
+def open_door(n, x, second_host):
     i = 0
-    while i < 1000:
+    while i < n:
         if x[i] == 0:
             second_host[i] = np.random.randint(1, 3)
         elif x[i] == 1:
@@ -51,10 +51,10 @@ def second_guess(n, y, second_host):
 
 
 
-def correct( x, y):
+def correct(n, x, y):
     count = 0
     i = 0
-    while i< 1000:
+    while i< n:
         if x[i] == y[i]:
             count = count + 1;
         i = i+1
@@ -62,35 +62,32 @@ def correct( x, y):
 
 #def plot_result(numCorrect):
 
-nsim = 1000
 
 #execute the functions and store the obtained values in appropriate variables
 
-x1 = simulate_host(1000)
-x2 = simulate_guess(1000)
+simulations = 10000;
 
-print("step 1 done")
-
-second_chance = np.zeros(1000)
-
-print("step 2 done")
-
-open_door(x1, second_chance)
-
-print("step 2.5")
-
-second_guess(1000, x2, second_chance)
-
-print("step 3 done")
-
-result = correct( x1, x2)
+x1 = simulate_host(simulations)
+x2 = simulate_guess(simulations)
 
 
-print("step 4 done")
+second_chance = np.zeros(simulations)
+
+
+open_door(simulations, x1, second_chance)
+
+
+
+second_guess(simulations, x2, second_chance)
+
+
+result = correct(simulations, x1, x2)
+
+
 print(result)
 
 labels = 'Correct Guess', 'Wrong Guess'
-sizes = [ result, 1000 - result]
+sizes = [ result, simulations - result]
 colors = [ 'green', 'red']
 
 plt.pie( sizes, labels=labels, colors=colors, startangle=140, autopct='%1.1f%%')
