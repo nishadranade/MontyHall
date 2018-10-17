@@ -49,9 +49,11 @@ def correct(n, x, y):
         i = i+1
     return count
 
-#execute the functions and store the obtained values in appropriate variables
+#stores the number of simulations you want to make. Increasing this number will take the winning percentage closer
+#to two thirds, or 66.6%
 simulations = 10000;
 
+#execute the functions and store the obtained values in appropriate variables
 x1 = simulate_host(simulations)
 x2 = simulate_guess(simulations)
 second_chance = np.zeros(simulations)
